@@ -330,6 +330,7 @@ export class MainComponent implements OnInit {
         color: 'white'
       }
     },
+    colors: ['#ff9800', '#e91e63', '#4caf50'],
     lineWidth: 5,
     width: 1000,
     height: 400,
