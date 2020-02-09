@@ -1,0 +1,48 @@
+.fade-in {
+    animation-name: fade-in;
+    animation-duration: 0.5s;
+    opacity: 0.0;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+    from {opacity: 0.0;}
+    to {opacity: 1.0;}
+}
+
+.content {
+    left: 0;
+    right: 0;
+    height: calc(100% - 130px);
+}
+
+.fact-cards-container {
+    display: inline-flex;
+    flex-flow: row wrap;
+    text-align: justify;
+    width: 100%;
+}
+
+.fact-card {
+    height: 150px;
+    width: 150px;
+    margin: 10px;
+}
+
+.fact-card-title {
+    font-weight: bold;
+}
+
+mat-card-content {
+    width: 150px;
+    height: 90px;
+    text-align: center;
+}
+
+.fact-card-details {
+
+}
+
+.spacer {
+    flex: 1 1 auto;
+}

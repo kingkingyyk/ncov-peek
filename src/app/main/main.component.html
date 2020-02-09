@@ -1,0 +1,73 @@
+<ng-container *ngIf="!confirmedData && !deathData && !recoveredData && !loaded">
+    <div class="fade-in" style="width: 100%;">
+        <div style="display: flex; justify-content: center; padding-top: 20%;">
+            <mat-spinner></mat-spinner>
+        </div>
+        <div style="text-align: center;">
+            <h1>Loading data...</h1>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="loaded">
+    <mat-sidenav-container class="content">
+        <mat-sidenav mode="side" #sidenav opened>
+            <h3 mat-subheader>Countries</h3>
+            <mat-nav-list dense>
+                <mat-list-item *ngFor="let item of countryDataMap | keyvalue" (click)="drawChart(item.value)">
+                    <ng-container *ngIf="item.value == selectedCountry"><span style="color: red">{{item.key}}</span>
+                    </ng-container>
+                    <ng-container *ngIf="item.value != selectedCountry">{{item.key}}</ng-container>
+                    <span class="spacer"></span>
+                    <mat-chip-list>
+                        <mat-chip color="accent">{{item.value.latestData().confirmedCount}}</mat-chip>
+                    </mat-chip-list>
+                </mat-list-item>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <mat-toolbar color="primary" *ngIf="selectedCountry">
+                <mat-toolbar-row>
+                    <span>{{selectedCountry.name}}</span>
+                    <span class="spacer"></span>
+                    <span style="font-size: small;">...{{selectedCountry.latestData().timestamp | date : "d MMM hh:mm a"}}</span>
+                </mat-toolbar-row>
+            </mat-toolbar>
+            <div *ngIf="selectedCountry" style="padding: 10px;">
+                <h2>Facts</h2>
+                <div class="fact-cards-container" *ngIf="selectedCountry">
+                    <mat-card class="fact-card" style="background-color: #3f51b5;">
+                        <p class="fact-card-title">Confirmed</p>
+                        <mat-card-content style="line-height: 90px; font-size: 50px;">
+                            {{selectedCountry.latestData().confirmedCount}}
+                        </mat-card-content>
+                        <p class="fact-card-details"> {{selectedCountry.firstConfirmedDate | date :  "dd MMM yyyy" }}
+                        </p>
+                    </mat-card>
+                    <mat-card class="fact-card" style="background-color: #e91e63;">
+                        <p class="fact-card-title">Death</p>
+                        <mat-card-content style="line-height: 90px; font-size: 50px;">
+                            {{selectedCountry.latestData().deathCount}}
+                        </mat-card-content>
+                        <p class="fact-card-details"> {{selectedCountry.latestData().deathRate}}%</p>
+                    </mat-card>
+                    <mat-card class="fact-card" style="background-color: #009688;">
+                        <p class="fact-card-title">Recovered</p>
+                        <mat-card-content style="line-height: 90px; font-size: 50px;">
+                            {{selectedCountry.latestData().recoveredCount}}
+                        </mat-card-content>
+                        <p class="fact-card-details"> {{selectedCountry.latestData().recoveryRate}}%</p>
+                    </mat-card>
+                </div>
+                <h2>Trend</h2>
+                <mat-card style="margin: 0px 10px 0px 10px;">
+                    <ng-container *ngIf="selectedCountry">
+                        <google-chart [type]="'LineChart'" [data]="chartData" [columnNames]="columnNames"
+                            [width]="chartOption.width" [height]="chartOption.height" [options]="chartOption">
+                        </google-chart>
+                    </ng-container>
+                </mat-card>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</ng-container>
