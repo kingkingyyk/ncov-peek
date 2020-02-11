@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../data.service';
 import { UiService } from '../ui.service';
 
@@ -42,7 +42,7 @@ export class MainComponent implements OnInit {
     this.navBarToggle.currentMessage.subscribe(() => {
       if (this.sideNav) {
         this.sideNav.toggle();
-        if(this.chart) this.chart.onWindowResize(null);
+        if (this.chart) this.chart.onWindowResize(null);
       }
     });
   }
@@ -109,9 +109,8 @@ export class MainComponent implements OnInit {
       for (let col=0;col<countryData.length;col++) {
         let ts = colTitles[col].toString().toString();
         if (this.isNumeric(ts.charAt(0))) {
-          console.log(ts.toString()+'>>> '+countryData[col].toString()+'>>> '+countryData[1].toString());
           if (this.isNumeric(countryData[col].toString())) country.addConfirmedCount(Utils.parseTimestamp(ts), parseInt(countryData[col].toString()));
-          //else country.addConfirmedCount(Utils.parseTimestamp(colTitles[col].toString()), 0);
+          else country.addConfirmedCount(Utils.parseTimestamp(colTitles[col].toString()), 0);
         }
         else if (colTitles[col].toString() === MainComponent.STATE_COL) country.addLocation(countryData[col].toString());
       }

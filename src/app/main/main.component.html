@@ -35,7 +35,7 @@
             </mat-toolbar>
             <div *ngIf="selectedCountry" style="padding: 10px;">
                 <h2>Facts</h2>
-                <fact-cards *ngIf="selectedCountry" #chart [country]="selectedCountry"></fact-cards>
+                <fact-cards *ngIf="selectedCountry" #facts [country]="selectedCountry"></fact-cards>
 
                 <h2>Trend</h2>
                 <mat-card style="margin: 0px 10px 0px 10px;">
