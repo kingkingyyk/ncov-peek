@@ -1,4 +1,23 @@
 .mat-toolbar {
     position: relative;
     z-index: 100;
-  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.live-icon {
+  background-color: #c2185b;
+  height: 7px;
+  width: 7px;
+  margin: 5px 10px 3px 0px;
+  display: inline-block;
+  border-radius: 3px;
+  animation: live-icon-anim 1.2s cubic-bezier(.5, 0, 1, 1) infinite alternate;  
+}
+
+@keyframes live-icon-anim {  
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
