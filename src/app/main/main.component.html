@@ -62,9 +62,7 @@
                 <h2>Trend</h2>
                 <mat-card style="margin: 0px 10px 0px 10px;">
                     <ng-container *ngIf="selectedCountry">
-                        <google-chart [type]="'LineChart'" [data]="chartData" [columnNames]="columnNames"
-                            [width]="chartOption.width" [height]="chartOption.height" [options]="chartOption">
-                        </google-chart>
+                        <trend-chart #chart [country]="selectedCountry" [sideNav]="sideNav"></trend-chart>
                     </ng-container>
                 </mat-card>
             </div>

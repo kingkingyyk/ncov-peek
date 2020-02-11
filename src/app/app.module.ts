@@ -21,13 +21,15 @@ import {MatButtonModule} from '@angular/material/button';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { TrendChartComponent } from './main/trend-chart/trend-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    TrendChartComponent
   ],
   imports: [
     BrowserModule,
