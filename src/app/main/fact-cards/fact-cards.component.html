@@ -1,0 +1,23 @@
+<div class="fact-cards-container">
+    <mat-card class="fact-card" style="background-color: #ff9800;">
+        <p class="fact-card-title">Confirmed</p>
+        <mat-card-content style="line-height: 90px; font-size: 50px;">
+            {{country.latestData().confirmedCount}}
+        </mat-card-content>
+        <p class="fact-card-details" style="font-size: small">First Found {{country.firstConfirmedDate() | date :  "dd MMM yyyy" }}</p>
+    </mat-card>
+    <mat-card class="fact-card" style="background-color: #e91e63;">
+        <p class="fact-card-title">Death</p>
+        <mat-card-content style="line-height: 90px; font-size: 50px;">
+            {{country.latestData().deathCount}}
+        </mat-card-content>
+        <p class="fact-card-details">{{country.latestData().deathRate}}%</p>
+    </mat-card>
+    <mat-card class="fact-card" style="background-color: #4caf50;">
+        <p class="fact-card-title">Recovered</p>
+        <mat-card-content style="line-height: 90px; font-size: 50px;">
+            {{country.latestData().recoveredCount}}
+        </mat-card-content>
+        <p class="fact-card-details">{{country.latestData().recoveryRate}}%</p>
+    </mat-card>
+</div>

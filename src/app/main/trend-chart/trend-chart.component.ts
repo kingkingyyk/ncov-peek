@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input, HostListener, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { GoogleChartComponent } from 'angular-google-charts';
-import { Country, } from 'src/app/objects';
+import { Country } from 'src/app/objects';
 import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({

@@ -46,7 +46,6 @@ export class Utils {
             }
             data.push(lineData);
         }
-        console.log(data);
         return data;
     }
 }
@@ -57,23 +56,12 @@ export class Country {
     timeSeriesMap: object;
     timeSeries: TimeSeriesData[];
     timeSeriesChartData: object[];
-    firstConfirmedDate: Date;
     locations: string[];
 
     constructor(public name: string) {
         this.clearData();
     }
 
-    clearData(): void {
-        this.timeSeriesMap = {};
-        this.timeSeries = [];
-        this.locations = [];
-        this.firstConfirmedDate = new Date();
-    }
-
-    updateFirstConfirmedDate(date: string) {
-        if (this.firstConfirmedDate.getTime() > Utils.parseDate(date).getTime()) this.firstConfirmedDate = Utils.parseDate(date);
-    }
     addLocation(loc: string) { if (this.locations.indexOf(loc) < 0 && loc.length > 0 && loc !== this.name) this.locations.push(loc); }
     addConfirmedCount(timestamp: Date, num: number): void { this.getTimeSeriesDataObject(timestamp.toString()).addConfirmedCount(num); }
     addDeathCount(timestamp: Date, num: number): void { this.getTimeSeriesDataObject(timestamp.toString()).addDeathCount(num); }
@@ -87,6 +75,12 @@ export class Country {
             this.timeSeriesMap[timestamp] = dat;
         }
         return dat;
+    }
+
+    clearData(): void {
+        this.timeSeriesMap = {};
+        this.timeSeries = [];
+        this.locations = [];
     }
 
     syncData() {
@@ -114,6 +108,10 @@ export class Country {
 
     latestData() {
         return this.timeSeries[this.timeSeries.length - 1];
+    }
+
+    firstConfirmedDate() : Date {
+        for (let ts of this.timeSeries) if (ts.confirmedCount > 0) return ts.timestamp;
     }
 }
 

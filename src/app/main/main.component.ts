@@ -15,7 +15,6 @@ import { TrendChartComponent } from './trend-chart/trend-chart.component';
 })
 export class MainComponent implements OnInit {
   static STATE_COL = "Province/State";
-  static FIRST_CONFIRM_COL = "First confirmed date in country";
   static REFRESH_SECONDS = 60;
   confirmedData: object[][];
   deathData: object[][];
@@ -43,7 +42,7 @@ export class MainComponent implements OnInit {
     this.navBarToggle.currentMessage.subscribe(() => {
       if (this.sideNav) {
         this.sideNav.toggle();
-        this.chart.onWindowResize(null);
+        if(this.chart) this.chart.onWindowResize(null);
       }
     });
   }
@@ -93,13 +92,13 @@ export class MainComponent implements OnInit {
       else this.drawChart(this.selectedCountry);
       setTimeout(() => {
         this.autoHideSideNav();
-        this.chart.onWindowResize(null);
+        if(this.chart) this.chart.onWindowResize(null);
       }, 300);
     }
   }
 
   isNumeric(value) {
-    return /^-{0,1}\d+$/.test(value);
+    return !isNaN(parseFloat(value));
   }
 
   parseConfirmed() {
@@ -108,11 +107,12 @@ export class MainComponent implements OnInit {
       let countryData = this.confirmedData[row];
       let country = this.getCountryData(countryData[1].toString());
       for (let col=0;col<countryData.length;col++) {
-        if (this.isNumeric(colTitles[col].toString().charAt(0))) {
-          if (this.isNumeric(countryData[col].toString())) country.addConfirmedCount(Utils.parseTimestamp(colTitles[col].toString()), parseInt(countryData[col].toString()));
-          else country.addConfirmedCount(Utils.parseTimestamp(colTitles[col].toString()), 0);
+        let ts = colTitles[col].toString().toString();
+        if (this.isNumeric(ts.charAt(0))) {
+          console.log(ts.toString()+'>>> '+countryData[col].toString()+'>>> '+countryData[1].toString());
+          if (this.isNumeric(countryData[col].toString())) country.addConfirmedCount(Utils.parseTimestamp(ts), parseInt(countryData[col].toString()));
+          //else country.addConfirmedCount(Utils.parseTimestamp(colTitles[col].toString()), 0);
         }
-        else if (colTitles[col].toString() === MainComponent.FIRST_CONFIRM_COL) country.updateFirstConfirmedDate(countryData[col].toString());
         else if (colTitles[col].toString() === MainComponent.STATE_COL) country.addLocation(countryData[col].toString());
       }
     }

@@ -16,32 +16,12 @@
     height: calc(100% - 130px);
 }
 
-.fact-cards-container {
-    display: inline-flex;
-    flex-flow: row wrap;
-    text-align: justify;
-    width: 100%;
-}
-
-.fact-card {
-    height: 150px;
-    width: 150px;
-    margin: 10px;
-}
-
-.fact-card-title {
-    font-weight: bold;
-}
-
 mat-card-content {
     width: 150px;
     height: 90px;
     text-align: center;
 }
 
-.fact-card-details {
-
-}
 
 .spacer {
     flex: 1 1 auto;

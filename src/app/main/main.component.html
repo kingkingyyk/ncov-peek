@@ -35,35 +35,11 @@
             </mat-toolbar>
             <div *ngIf="selectedCountry" style="padding: 10px;">
                 <h2>Facts</h2>
-                <div class="fact-cards-container" *ngIf="selectedCountry">
-                    <mat-card class="fact-card" style="background-color: #ff9800;">
-                        <p class="fact-card-title">Confirmed</p>
-                        <mat-card-content style="line-height: 90px; font-size: 50px;">
-                            {{selectedCountry.latestData().confirmedCount}}
-                        </mat-card-content>
-                        <p class="fact-card-details"> {{selectedCountry.firstConfirmedDate | date :  "dd MMM yyyy" }}
-                        </p>
-                    </mat-card>
-                    <mat-card class="fact-card" style="background-color: #e91e63;">
-                        <p class="fact-card-title">Death</p>
-                        <mat-card-content style="line-height: 90px; font-size: 50px;">
-                            {{selectedCountry.latestData().deathCount}}
-                        </mat-card-content>
-                        <p class="fact-card-details"> {{selectedCountry.latestData().deathRate}}%</p>
-                    </mat-card>
-                    <mat-card class="fact-card" style="background-color: #4caf50;">
-                        <p class="fact-card-title">Recovered</p>
-                        <mat-card-content style="line-height: 90px; font-size: 50px;">
-                            {{selectedCountry.latestData().recoveredCount}}
-                        </mat-card-content>
-                        <p class="fact-card-details"> {{selectedCountry.latestData().recoveryRate}}%</p>
-                    </mat-card>
-                </div>
+                <fact-cards *ngIf="selectedCountry" #chart [country]="selectedCountry"></fact-cards>
+
                 <h2>Trend</h2>
                 <mat-card style="margin: 0px 10px 0px 10px;">
-                    <ng-container *ngIf="selectedCountry">
-                        <trend-chart #chart [country]="selectedCountry" [sideNav]="sideNav"></trend-chart>
-                    </ng-container>
+                    <trend-chart *ngIf="selectedCountry" #chart [country]="selectedCountry" [sideNav]="sideNav"></trend-chart>
                 </mat-card>
             </div>
         </mat-sidenav-content>

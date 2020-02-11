@@ -22,6 +22,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { TrendChartComponent } from './main/trend-chart/trend-chart.component';
+import { FactCardsComponent } from './main/fact-cards/fact-cards.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TrendChartComponent } from './main/trend-chart/trend-chart.component';
     MainComponent,
     FooterComponent,
     HeaderComponent,
-    TrendChartComponent
+    TrendChartComponent,
+    FactCardsComponent
   ],
   imports: [
     BrowserModule,
