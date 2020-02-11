@@ -50,8 +50,6 @@ export class Utils {
     }
 }
 
-
-
 export class Country {
     timeSeriesMap: object;
     timeSeries: TimeSeriesData[];
