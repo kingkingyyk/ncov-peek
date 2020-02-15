@@ -109,8 +109,8 @@ export class MainComponent implements OnInit {
       for (let col=0;col<countryData.length;col++) {
         let ts = colTitles[col].toString().toString();
         if (this.isNumeric(ts.charAt(0))) {
-          if (this.isNumeric(countryData[col].toString())) country.addConfirmedCount(Utils.parseTimestamp(ts), parseInt(countryData[col].toString()));
-          else country.addConfirmedCount(Utils.parseTimestamp(colTitles[col].toString()), 0);
+          if (this.isNumeric(countryData[col].toString())) country.addConfirmedCount(Utils.parseDate(ts), parseInt(countryData[col].toString()));
+          else country.addConfirmedCount(Utils.parseDate(colTitles[col].toString()), 0);
         }
         else if (colTitles[col].toString() === MainComponent.STATE_COL) country.addLocation(countryData[col].toString());
       }
@@ -124,9 +124,9 @@ export class MainComponent implements OnInit {
       let country = this.getCountryData(countryData[1].toString());
       for (let col=0;col<countryData.length;col++) {
         if (this.isNumeric(colTitles[col].toString().charAt(0))) {
-          let ts = Utils.parseTimestamp(colTitles[col].toString());
+          let ts = Utils.parseDate(colTitles[col].toString());
           if (this.isNumeric(countryData[col].toString())) country.addDeathCount(ts, parseInt(countryData[col].toString()));
-          else country.addDeathCount(Utils.parseTimestamp(colTitles[col].toString()), 0);
+          else country.addDeathCount(Utils.parseDate(colTitles[col].toString()), 0);
         }
         else if (colTitles[col].toString() === MainComponent.STATE_COL) country.addLocation(countryData[col].toString());
       }
@@ -140,9 +140,9 @@ export class MainComponent implements OnInit {
       let country = this.getCountryData(countryData[1].toString());
       for (let col=0;col<countryData.length;col++) {
         if (this.isNumeric(colTitles[col].toString().charAt(0))) {
-          let ts = Utils.parseTimestamp(colTitles[col].toString());
+          let ts = Utils.parseDate(colTitles[col].toString());
           if (this.isNumeric(countryData[col].toString())) country.addRecoveredCount(ts, parseInt(countryData[col].toString()));
-          else country.addRecoveredCount(Utils.parseTimestamp(colTitles[col].toString()), 0);
+          else country.addRecoveredCount(Utils.parseDate(colTitles[col].toString()), 0);
         }
         else if (colTitles[col].toString() === MainComponent.STATE_COL) country.addLocation(countryData[col].toString());
       }
@@ -168,7 +168,7 @@ export class MainComponent implements OnInit {
 
   drawChart(country: Country) {
     this.selectedCountry = country;
-    this.titleService.setTitle('nCov Peek - '+this.selectedCountry.name);
+    this.titleService.setTitle('COVID-19 Peek - '+this.selectedCountry.name);
     this.autoHideSideNav();
     if (this.chart) this.chart.onWindowResize(null);
   }
